@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.bobrovozka.instructions.core.utils.DateTimeUtils.nowUTCSeconds;
+
 @Service
 @Slf4j
 public class InstructionServiceImpl implements InstructionService {
@@ -22,6 +24,8 @@ public class InstructionServiceImpl implements InstructionService {
 
     @Override
     public void create(Instruction instruction) {
+        instruction.setCreated(nowUTCSeconds());
+        instruction.setLastUpdated(nowUTCSeconds());
         repository.save(instruction);
         log.info("Instruction created & saved to repo: {}", instruction.toString());
     }
@@ -43,6 +47,7 @@ public class InstructionServiceImpl implements InstructionService {
 
     @Override
     public void update(Instruction instruction) {
+        instruction.setLastUpdated(nowUTCSeconds());
         repository.save(instruction);
         log.info("Instruction updated in repo: {}", instruction.toString());
     }
@@ -53,4 +58,5 @@ public class InstructionServiceImpl implements InstructionService {
         log.info("Instruction with \n ID: {} \n NAME: {} \n deleted", instruction.getId(), instruction.getName());
         repository.deleteById(id);
     }
+
 }
