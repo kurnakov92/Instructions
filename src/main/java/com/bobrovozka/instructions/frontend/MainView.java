@@ -4,13 +4,13 @@ import com.bobrovozka.instructions.core.entity.Instruction;
 import com.bobrovozka.instructions.core.service.InstructionService;
 import com.bobrovozka.instructions.frontend.form.AddInstructionForm;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
-public class MainView extends FormLayout {
+public class MainView extends VerticalLayout {
 
     private InstructionService service;
 
@@ -23,6 +23,7 @@ public class MainView extends FormLayout {
 
     private HorizontalLayout toolbar;
     private Button addInstructionBtn;
+    private Button showInstructionBtn;
 
     public MainView(InstructionService service) {
         this.service = service;
@@ -32,6 +33,7 @@ public class MainView extends FormLayout {
         this.clearNameFilter = new Button();
         this.toolbar = new HorizontalLayout();
         this.addInstructionBtn = new Button();
+        this.showInstructionBtn = new Button();
 
         tuneFields();
 
@@ -54,9 +56,14 @@ public class MainView extends FormLayout {
             grid.asSingleSelect().clear();
             addInstructionForm.setInstruction(new Instruction());
         });
+        showInstructionBtn.setText("Show instruction");
+        showInstructionBtn.addClickListener(event -> {
+
+        });
 
         grid.setSizeFull();
-        //todo отображение инструкций
+        grid.addColumn(Instruction::getName).setHeader("Name");
+        grid.addColumn().setHeader("Name");
 
     }
 
