@@ -23,11 +23,11 @@ public class InstructionServiceImpl implements InstructionService {
 
 
     @Override
-    public void create(Instruction instruction) {
+    public void save(Instruction instruction) {
         instruction.setCreated(nowUTCSeconds());
         instruction.setLastUpdated(nowUTCSeconds());
         repository.save(instruction);
-        log.info("Instruction created & saved to repo: {}", instruction.toString());
+        log.info("Instruction saved to repo: {}", instruction.toString());
     }
 
     @Override

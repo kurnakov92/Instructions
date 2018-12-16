@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface InstructionService {
 
-    void create(Instruction instruction);
+    void save(Instruction instruction);
 
     Optional<Instruction> findById(String id);
 
